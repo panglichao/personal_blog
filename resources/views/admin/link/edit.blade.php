@@ -31,7 +31,7 @@
                     <i class="layui-icon">&#xe67c;</i>上传图片
                 </button>
                 @if($link->thumb)
-                    <a>{{$link->thumb}}</a>
+                    <a href="http://personal_blog.com/{{$link->thumb}}" target="_blank">{{$link->thumb}}</a>
                 @endif
             </div>
         </div>
@@ -57,12 +57,14 @@
                     ,exts: 'jpg|png|gif|jpeg' //文件格式
                     // ,data: {width:200,height:200} //可选项。额外的参数
                     ,url: '/api/upload' //上传接口
+                    ,multiple: false //单图片
+                    ,number: 1 //同时上传个数
                     ,done: function(res){
                         //上传完毕回调
                         if(res.msg == 'success'){
                             layer.msg('上传成功！',{icon: 6});
                             $('a').remove();//移除旧元素
-                            $('#thumb').parent('.layui-input-block').append('<span>'+res.path+','+'</span>');
+                            $('#thumb').parent('.layui-input-block').append('<a target="_blank" href="http://personal_blog.com/'+res.path+'">'+res.path+'</a>');
                         }else if(res.msg == 'error'){
                             layer.msg('格式有误！',{icon: 5});
                         }else{
@@ -89,9 +91,8 @@
                     }else{
                         var is_show = 'no';
                     }
-                    if($('a').text() || $('span').text()){
-                        //thumb所有同级的元素文本值(多图)
-                        var thumb = $("#thumb").siblings().text();
+                    if($('a').text()){
+                        var thumb = $('a').text();
                     }else{
                         var thumb = '';
                     }

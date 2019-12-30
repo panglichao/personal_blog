@@ -32,11 +32,7 @@
                             </td>
                             <td>
                                 @if($value->thumb)
-                                    <?php
-                                    $thumb = substr($value->thumb, 0, -1);
-                                    $thumbs = explode(',',$thumb);
-                                    echo count($thumbs).'张';
-                                    ?>
+                                    <img width="100%" height="50px" src="http://personal_blog.com/{{$value->thumb}}">
                                 @else
                                     无图
                                 @endif

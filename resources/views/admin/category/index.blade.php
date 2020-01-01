@@ -53,11 +53,7 @@
                             </td>
                             <td>
                                 @if($value->thumb)
-                                    <?php
-                                    $thumb = substr($value->thumb, 0, -1);
-                                    $thumbs = explode(',',$thumb);
-                                    echo count($thumbs).'张';
-                                    ?>
+                                    <img style="cursor: pointer;" title="点击查看" width="100%" height="50px" src="http://personal_blog.com/{{$value->thumb}}" onclick="showimg(this)"/>
                                 @else
                                     无图
                                 @endif
@@ -174,6 +170,20 @@
                         layer.msg('切换显示失败！请稍后再试！',{icon: 5});
                 });
                 layer.close(index);
+            });
+        });
+    }
+
+    function showimg(that) {
+        layui.use('layer', function(){
+            layer.open({
+                type: 1,
+                title: false,
+                closeBtn: 1,
+                area: ['50%','50%'],
+                skin: 'layui-layer-nobg', //没有背景色
+                shadeClose: true,
+                content: '<img style="display: inline-block; width: 100%; height: 100%;" src="'+that.src+'">'
             });
         });
     }

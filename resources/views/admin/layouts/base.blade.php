@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>@yield('title', 'Laravel_Blog')管理系统</title>
+  <title>@yield('title', 'Laravel_Blog')</title>
   <link rel="stylesheet" href="/layui/css/layui.css">
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
   <script src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
@@ -11,7 +11,7 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
   <div class="layui-header">
-    <div class="layui-logo">{{ config('app.name', 'Laravel_Blog') }}</div>
+    <a href="/admin"><div class="layui-logo">{{ config('app.name', 'Laravel_Blog') }}</div></a>
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
       @foreach($menu['top_left'] as $key => $value)

@@ -85,7 +85,8 @@ class ArticleController extends BaseController
                 $article = Article::find($data['id']);
                 //删除旧图(包含多图)
                 if($data['thumb'] != $article->thumb){
-                    if($this->batchUnlink($article->thumb)){
+//                    if($this->batchUnlink($article->thumb)){
+                    if($this->unlinkOld($article->thumb)){
                         return ['msg' => 'error'];
                     }
                 }
@@ -179,17 +180,26 @@ class ArticleController extends BaseController
         //DB::table('xx')->whereIn('primaryKey',[1,3,5])->update(['status'=>1]);
     }
 
-    //删除旧图(包含多图，批量)
-    public function batchUnlink($thumb){
-        $thumbs = substr($thumb, 0, -1);
-        $thumbs = explode(',',$thumbs);
-        $thumbs = array_filter($thumbs);
-        foreach ($thumbs as $key => $value){
-            if(file_exists($value)){
-                unlink($value);
-            }else{
-                return false;
-            }
+//    //删除旧图(包含多图，批量)
+//    public function batchUnlink($thumb){
+//        $thumbs = substr($thumb, 0, -1);
+//        $thumbs = explode(',',$thumbs);
+//        $thumbs = array_filter($thumbs);
+//        foreach ($thumbs as $key => $value){
+//            if(file_exists($value)){
+//                unlink($value);
+//            }else{
+//                return false;
+//            }
+//        }
+//    }
+
+    //删除旧图
+    public function unlinkOld($thumb){
+        if(file_exists($thumb)){
+            unlink($thumb);
+        }else{
+            return false;
         }
     }
 

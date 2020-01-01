@@ -115,12 +115,18 @@
                     ,exts: 'jpg|png|gif|jpeg' //文件格式
                     // ,data: {width:200,height:200} //可选项。额外的参数
                     ,url: '/api/upload' //上传接口
+                    ,multiple: false //单图片
+                    ,number: 1 //同时上传个数
+                    ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+                        layer.load(); //上传loading
+                    }
                     ,done: function(res){
+                        layer.closeAll('loading'); //关闭loading
                         //上传完毕回调
                         if(res.msg == 'success'){
                             layer.msg('上传成功！',{icon: 6});
                             $('a').remove();//移除旧元素
-                            $('#thumb').parent('.layui-input-block').append('<span>'+res.path+','+'</span>');
+                            $('#thumb').parent('.layui-input-block').append('<a target="_blank" href="http://personal_blog.com/'+res.path+'">'+res.path+'</a>');
                         }else if(res.msg == 'error'){
                             layer.msg('格式有误！',{icon: 5});
                         }else{
@@ -129,6 +135,8 @@
                     }
                     ,error: function(){
                         //请求异常回调（一般为网络异常、URL 404等）。返回两个参数，分别为：index（当前文件的索引）、upload（重新上传的方法）。详见下文
+                        layer.closeAll('loading');
+                        layer.msg('网络异常，请稍后重试！');
                     }
                 });
             });
@@ -157,9 +165,8 @@
                     }else{
                         var is_show = 'no';
                     }
-                    if($('a').text() || $('span').text()){
-                        //thumb所有同级的元素文本值(多图)
-                        var thumb = $("#thumb").siblings().text();
+                    if($('a').text()){
+                        var thumb = $('a').text();
                     }else{
                         var thumb = '';
                     }

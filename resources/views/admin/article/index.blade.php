@@ -57,18 +57,14 @@
                             <td>{{$value->click}}</td>
                             <td>
                                 @if($value->is_show =='yes')
-                                    是
+                                    <font color="blue">是</font>
                                 @else
-                                    否
+                                    <font color="red">否</font>
                                 @endif
                             </td>
                             <td>
                                 @if($value->thumb)
-                                    <?php
-                                    $thumb = substr($value->thumb, 0, -1);
-                                    $thumbs = explode(',',$thumb);
-                                    echo count($thumbs).'张';
-                                    ?>
+                                    <img style="cursor: pointer;" title="点击查看" width="100%" height="50px" src="http://personal_blog.com/{{$value->thumb}}" onclick="showimg(this)"/>
                                 @else
                                     无图
                                 @endif
@@ -231,6 +227,20 @@
                         layer.msg('批量切换显示状态失败！请稍后再试！',{icon: 5});
                 });
                 layer.close(index);
+            });
+        });
+    }
+
+    function showimg(that) {
+        layui.use('layer', function(){
+            layer.open({
+                type: 1,
+                title: false,
+                closeBtn: 1,
+                area: ['50%','50%'],
+                skin: 'layui-layer-nobg', //没有背景色
+                shadeClose: true,
+                content: '<img style="display: inline-block; width: 100%; height: 100%;" src="'+that.src+'">'
             });
         });
     }

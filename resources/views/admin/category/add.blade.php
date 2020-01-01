@@ -79,7 +79,13 @@
                     ,exts: 'jpg|png|gif|jpeg' //文件格式
                     // ,data: {width:200,height:200} //可选项。额外的参数
                     ,url: '/api/upload' //上传接口
+                    ,multiple: false //单图片
+                    ,number: 1 //同时上传个数
+                    ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+                        layer.load(); //上传loading
+                    }
                     ,done: function(res){
+                        layer.closeAll('loading'); //关闭loading
                         //上传完毕回调
                         if(res.msg == 'success'){
                             layer.msg('上传成功！',{icon: 6});

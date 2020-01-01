@@ -32,7 +32,7 @@
                             </td>
                             <td>
                                 @if($value->thumb)
-                                    <img width="100%" height="50px" src="http://personal_blog.com/{{$value->thumb}}" onclick="showimg(this)"/>
+                                    <img style="cursor: pointer;" title="点击查看" width="100%" height="50px" src="http://personal_blog.com/{{$value->thumb}}" onclick="showimg(this)"/>
                                 @else
                                     无图
                                 @endif

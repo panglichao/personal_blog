@@ -54,7 +54,7 @@ class CategoryController extends BaseController
                 $category = Category::find($data['id']);
                 //删除旧图(包含多图)
                 if($data['thumb'] != $category->thumb){
-                    if($this->batchUnlink($category->thumb)){
+                    if($this->unlinkOld($category->thumb)){
                         return ['msg' => 'error'];
                     }
                 }
@@ -84,17 +84,12 @@ class CategoryController extends BaseController
         }
     }
 
-    //删除旧图(包含多图，批量)
-    public function batchUnlink($thumb){
-        $thumbs = substr($thumb, 0, -1);
-        $thumbs = explode(',',$thumbs);
-        $thumbs = array_filter($thumbs);
-        foreach ($thumbs as $key => $value){
-            if(file_exists($value)){
-                unlink($value);
-            }else{
-                return false;
-            }
+    //删除旧图
+    public function unlinkOld($thumb){
+        if(file_exists($thumb)){
+            unlink($thumb);
+        }else{
+            return false;
         }
     }
 

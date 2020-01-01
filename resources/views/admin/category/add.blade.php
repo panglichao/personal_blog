@@ -83,7 +83,7 @@
                         //上传完毕回调
                         if(res.msg == 'success'){
                             layer.msg('上传成功！',{icon: 6});
-                            $('#thumb').parent('.layui-input-block').append('<a>'+res.path+','+'</a>');
+                            $('#thumb').parent('.layui-input-block').append('<a target="_blank" href="http://personal_blog.com/'+res.path+'">'+res.path+'</a>');
                         }else if(res.msg == 'error'){
                             layer.msg('格式有误！',{icon: 5});
                         }else{
@@ -115,8 +115,7 @@
                         var is_show = 'no';
                     }
                     if($('a').text()){
-                        //thumb所有同级的元素文本值(多图)
-                        var thumb = $("#thumb").siblings().text();
+                        var thumb = $('a').text();
                     }else{
                         var thumb = '';
                     }

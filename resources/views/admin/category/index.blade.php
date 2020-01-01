@@ -46,9 +46,9 @@
                             </td>
                             <td>
                                 @if($value->is_show =='yes')
-                                    是
+                                    <font color="blue">是</font>
                                 @else
-                                    否
+                                    <font color="red">否</font>
                                 @endif
                             </td>
                             <td>

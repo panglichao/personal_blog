@@ -73,6 +73,8 @@
                     }
                     ,error: function(){
                         //请求异常回调（一般为网络异常、URL 404等）。返回两个参数，分别为：index（当前文件的索引）、upload（重新上传的方法）。详见下文
+                        layer.closeAll('loading');
+                        layer.msg('网络异常，请稍后重试！');
                     }
                 });
             });

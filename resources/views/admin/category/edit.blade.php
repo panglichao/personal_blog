@@ -88,7 +88,7 @@
                         if(res.msg == 'success'){
                             layer.msg('上传成功！',{icon: 6});
                             $('a').remove();//移除旧元素
-                            $('#thumb').parent('.layui-input-block').append('<span>'+res.path+','+'</span>');
+                            $('#thumb').parent('.layui-input-block').append('<a target="_blank" href="http://personal_blog.com/'+res.path+'">'+res.path+'</a>');
                         }else if(res.msg == 'error'){
                             layer.msg('格式有误！',{icon: 5});
                         }else{
@@ -97,6 +97,8 @@
                     }
                     ,error: function(){
                         //请求异常回调（一般为网络异常、URL 404等）。返回两个参数，分别为：index（当前文件的索引）、upload（重新上传的方法）。详见下文
+                        layer.closeAll('loading');
+                        layer.msg('网络异常，请稍后重试！');
                     }
                 });
             });
@@ -119,8 +121,7 @@
                         var is_show = 'no';
                     }
                     if($('a').text() || $('span').text()){
-                        //thumb所有同级的元素文本值(多图)
-                        var thumb = $("#thumb").siblings().text();
+                        var thumb = $('a').text();
                     }else{
                         var thumb = '';
                     }

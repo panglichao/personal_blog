@@ -52,7 +52,7 @@ class CategoryController extends BaseController
                 return ['msg' => 'fail'];
             }else{
                 $category = Category::find($data['id']);
-                //删除旧图(包含多图)
+                //删除旧图
                 if($data['thumb'] != $category->thumb){
                     if($this->unlinkOld($category->thumb)){
                         return ['msg' => 'error'];

@@ -45,7 +45,7 @@
                     <i class="layui-icon">&#xe67c;</i>上传图片
                 </button>
                 @if($category->thumb)
-                    <a>{{$category->thumb}}</a>
+                    <a href="http://personal_blog.com/{{$category->thumb}}" target="_blank">{{$category->thumb}}</a>
                 @endif
             </div>
         </div>
